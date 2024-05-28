@@ -1,0 +1,147 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background-color: #181925;
+  width: 500px;
+  height: 422px;
+}
+
+.card-header {
+  text-align: center;
+  color: #fff;
+  font-size: 23px;
+}
+
+.background {
+  background-image: url("../images/WdO7KkfY06xG.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+}
+.card-header h2 {
+  color: #fff;
+  font-size: 23px;
+  padding: 14px 0px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 50px;
+}
+
+.card-form {
+  display: flex;
+  /* margin: 10px; */
+  gap: 10px;
+  flex-direction: column;
+}
+.credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card-form label {
+  color: #8f8f8f;
+  font-size: 15px;
+}
+
+.card-center-button input[type="button"] {
+  border-radius: 10px;
+  background: #1c1d2b;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+  font-weight: 400;
+  cursor: pointer;
+  width: 312px;
+  height: 44px;
+  padding: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
+}
+
+.card-body .card-input {
+  background: #14151f;
+  outline: none;
+  padding: 10px;
+  height: 50px;
+  color: white;
+  border: none;
+}
+
+.card-center-button {
+  display: flex;
+  justify-content: center;
+}
+
+.copyright {
+  position: absolute;
+  color: #222435;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+}
+
+.register a {
+  color: #407bff;
+  padding-left: 5px;
+  text-decoration: none;
+}
+.register {
+  padding-top: 27px;
+  display: flex;
+  justify-content: center;
+}
+.register span {
+  color: #2c2e44;
+}
+
+.login-results-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.login-result {
+  background-color: #181925;
+  border: 1px solid #407bff;
+  width: 300px;
+  text-align: center;
+  padding: 20px 0px;
+  border-radius: 10px;
+  color: white;
+  margin-top: 10px;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.login-result.failed {
+  border: 1px solid rgba(141, 3, 3, 0.41) !important;
+  background: #972727 !important;
+}
